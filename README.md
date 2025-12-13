@@ -1,3 +1,5 @@
+# saya sarankan membuka website melalui dekstop
+
 # 🌌 Personal Portfolio Website
 
 Website portofolio pribadi berbasis **front-end** dengan konsep **Dark Luxury Tech**.  
