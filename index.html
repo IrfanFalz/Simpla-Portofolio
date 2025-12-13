@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - Irfan Fahri Lazuardi</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        * { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, h4, h5, h6 { font-family: 'Montserrat', sans-serif; }
+        
+        body {
+            background: #0a0a0a;
+            overflow-x: hidden;
+        }
+
+        /* Background Animation - Enhanced Floating Gold Particles */
+        .particles-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            animation: float linear infinite;
+        }
+
+        .particle-bright {
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.9) 0%, rgba(212, 175, 55, 0.3) 50%, rgba(212, 175, 55, 0) 100%);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.8), 0 0 40px rgba(212, 175, 55, 0.4);
+            filter: blur(0.5px);
+        }
+
+        .particle-medium {
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.6) 0%, rgba(212, 175, 55, 0.2) 50%, rgba(212, 175, 55, 0) 100%);
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+            filter: blur(1px);
+        }
+
+        .particle-dim {
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.3) 0%, rgba(212, 175, 55, 0.1) 50%, rgba(212, 175, 55, 0) 100%);
+            filter: blur(2px);
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) translateX(0) scale(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) translateX(var(--tx)) scale(1) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Gold Glow Effect */
+        .gold-glow {
+            color: #d4af37;
+            text-shadow: 
+                0 0 10px rgba(212, 175, 55, 0.5),
+                0 0 20px rgba(212, 175, 55, 0.3),
+                0 0 30px rgba(212, 175, 55, 0.2);
+            animation: glow-pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes glow-pulse {
+            0%, 100% {
+                text-shadow: 
+                    0 0 10px rgba(212, 175, 55, 0.5),
+                    0 0 20px rgba(212, 175, 55, 0.3),
+                    0 0 30px rgba(212, 175, 55, 0.2);
+            }
+            50% {
+                text-shadow: 
+                    0 0 15px rgba(212, 175, 55, 0.7),
+                    0 0 30px rgba(212, 175, 55, 0.5),
+                    0 0 45px rgba(212, 175, 55, 0.3);
+            }
+        }
+
+        /* Typing Cursor */
+        .typing-cursor {
+            display: inline-block;
+            width: 3px;
+            height: 1em;
+            background: #d4af37;
+            margin-left: 5px;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 49% { opacity: 1; }
+            50%, 100% { opacity: 0; }
+        }
+
+        /* Navbar Enhanced */
+        .navbar-blur {
+            background: rgba(10, 10, 10, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+        }
+
+        .nav-link {
+            position: relative;
+            padding: 0.5rem 0;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #d4af37, transparent);
+            transform: translateX(-50%);
+            transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .nav-link:hover::before {
+            width: 100%;
+        }
+
+        .nav-link:hover {
+            color: #d4af37;
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+        }
+
+        .nav-link.active-nav {
+            color: #d4af37;
+            text-shadow: 0 0 15px rgba(212, 175, 55, 0.6);
+        }
+
+        .nav-link.active-nav::before {
+            width: 100%;
+        }
+
+        /* Gold Accent */
+        .gold-accent {
+            color: #d4af37;
+        }
+
+        .gold-border {
+            border: 1px solid rgba(212, 175, 55, 0.3);
+        }
+
+        .gold-border-hover:hover {
+            border-color: rgba(212, 175, 55, 0.8);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+        }
+
+        /* Button Styles */
+        .btn-gold {
+            background: linear-gradient(135deg, #d4af37 0%, #aa8a2e 100%);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .btn-gold:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 15px 35px rgba(212, 175, 55, 0.5);
+            background: linear-gradient(135deg, #e5c048 0%, #bb9b3f 100%);
+        }
+
+        .btn-outline-gold {
+            border: 2px solid #d4af37;
+            color: #d4af37;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-outline-gold::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: #d4af37;
+            transition: left 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: -1;
+        }
+
+        .btn-outline-gold:hover::before {
+            left: 0;
+        }
+
+        .btn-outline-gold:hover {
+            color: #0a0a0a;
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 15px 35px rgba(212, 175, 55, 0.5);
+        }
+
+        /* Card Hover Effect - Enhanced */
+        .card-hover {
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .card-hover:hover {
+            transform: translateY(-15px) scale(1.02);
+            border-color: rgba(212, 175, 55, 0.8);
+            box-shadow: 
+                0 25px 50px rgba(212, 175, 55, 0.3),
+                0 0 40px rgba(212, 175, 55, 0.2);
+            z-index: 10;
+        }
+
+        .projects-container:has(.card-hover:hover) .card-hover:not(:hover) {
+            transform: scale(0.95);
+            opacity: 0.5;
+            filter: blur(2px) brightness(0.7);
+        }
+
+        /* Photo Frame - Reveal Animation */
+        .photo-frame {
+            position: relative;
+            border: 3px solid rgba(212, 175, 55, 0.5);
+            box-shadow: 
+                0 0 30px rgba(212, 175, 55, 0.3),
+                inset 0 0 20px rgba(212, 175, 55, 0.1);
+            overflow: hidden;
+        }
+
+        .photo-reveal {
+            clip-path: inset(50% 0 50% 0);
+            animation: reveal-photo 1.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+
+        @keyframes reveal-photo {
+            0% {
+                clip-path: inset(50% 0 50% 0);
+            }
+            100% {
+                clip-path: inset(0 0 0 0);
+            }
+        }
+
+        .photo-frame::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.4), transparent);
+            animation: shine 3s infinite;
+            z-index: 1;
+        }
+
+        @keyframes shine {
+            0% { left: -100%; }
+            50%, 100% { left: 100%; }
+        }
+
+        /* Skill Icon Glow */
+        .skill-icon {
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .skill-icon:hover {
+            filter: drop-shadow(0 0 20px rgba(212, 175, 55, 0.8));
+            transform: scale(1.15) rotate(5deg);
+        }
+
+        /* Social Icon Glow */
+        .social-icon {
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 2px solid rgba(212, 175, 55, 0.3);
+        }
+
+        .social-icon:hover {
+            border-color: #d4af37;
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.6);
+            transform: translateY(-5px) scale(1.03);
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #1a1a1a;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, #d4af37 0%, #aa8a2e 100%);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #d4af37;
+        }
+
+        .sipers {
+            object-fit: cover;
+            object-position: 50% 73%;
+        }
+    </style>
+</head>
+<body class="text-gray-300">
+    <!-- Particles Background -->
+    <div class="particles-container" id="particles"></div>
+
+    <!-- Navbar -->
+    <nav class="navbar-blur fixed w-full top-0 z-50 transition-all duration-300" id="navbar">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <a href="#" class="text-2xl font-bold gold-accent">Portfolio</a>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#home" class="nav-link hover:text-gold-accent transition-colors">Home</a>
+                    <a href="#meet" class="nav-link hover:text-gold-accent transition-colors">Meet Me</a>
+                    <a href="#projects" class="nav-link hover:text-gold-accent transition-colors">Projects</a>
+                    <a href="#about" class="nav-link hover:text-gold-accent transition-colors">About</a>
+                    <a href="#skills" class="nav-link hover:text-gold-accent transition-colors">Skills</a>
+                    <a href="#contact" class="nav-link hover:text-gold-accent transition-colors">Contact</a>
+                </div>
+                <button id="mobile-menu-btn" class="md:hidden text-gold-accent">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="hidden md:hidden mt-4 space-y-3">
+                <a href="#home" class="block hover:text-gold-accent transition-colors">Home</a>
+                <a href="#meet" class="block hover:text-gold-accent transition-colors">Meet Me</a>
+                <a href="#projects" class="block hover:text-gold-accent transition-colors">Projects</a>
+                <a href="#about" class="block hover:text-gold-accent transition-colors">About</a>
+                <a href="#skills" class="block hover:text-gold-accent transition-colors">Skills</a>
+                <a href="#contact" class="block hover:text-gold-accent transition-colors">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative min-h-screen flex items-center justify-center px-6 pt-20">
+        <div class="container mx-auto text-center z-10">
+            <div class="mb-6">
+                <p class="text-2xl md:text-3xl text-gray-400 mb-4 font-light">Hallo, I am</p>
+                <h1 class="text-5xl md:text-7xl font-bold gold-glow min-h-[80px] md:min-h-[100px]">
+                    <span id="typed-text"></span>
+                    <span class="typing-cursor"></span>
+                </h1>
+            </div>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center mt-8" data-aos="fade-up" data-aos-delay="500">
+                <a href="#projects" class="btn-gold px-8 py-3 rounded-full font-semibold inline-block">
+                    View My Works
+                </a>
+                <a href="#contact" class="btn-outline-gold px-8 py-3 rounded-full font-semibold inline-block">
+                    Contact Me
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Meet Me Section -->
+    <section id="meet" class="relative py-16 px-6">
+        <div class="container mx-auto max-w-5xl">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-12 gold-accent" data-aos="fade-up">
+                Hallo semua, perkenalkan saya
+            </h2>
+            <div class="flex flex-col md:flex-row items-center gap-12">
+                <div class="w-full md:w-1/3" data-aos="fade-right" data-aos-duration="1000">
+                    <div class="photo-frame rounded-2xl overflow-hidden mx-auto max-w-xs">
+                        <img src="assets/irfan.png" 
+                             alt="Profile Photo" 
+                             class="photo-reveal w-full h-full object-cover">
+                    </div>
+                </div>
+                <div class="w-full md:w-2/3" data-aos="fade-left" data-aos-duration="800">
+                    <h3 class="text-3xl font-bold mb-4 gold-accent">Irfan Fahri Lazuardi</h3>
+                    <p class="text-gray-400 leading-relaxed mb-4">
+                        Saya adalah siswa SMK jurusan Rekayasa Perangkat Lunak kelas XI yang passionate dalam dunia pemrograman, khususnya front-end development.
+                    </p>
+                    <p class="text-gray-400 leading-relaxed mb-4">
+                        Saya senang menciptakan pengalaman web yang menarik dan interaktif. Setiap project adalah kesempatan untuk belajar dan berkembang.
+                    </p>
+                    <div class="flex flex-wrap gap-3 mt-6">
+                        <span class="px-4 py-2 gold-border rounded-full text-sm">HTML & CSS</span>
+                        <span class="px-4 py-2 gold-border rounded-full text-sm">JavaScript</span>
+                        <span class="px-4 py-2 gold-border rounded-full text-sm">Tailwind CSS</span>
+                        <span class="px-4 py-2 gold-border rounded-full text-sm">Figma</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="relative py-16 px-6">
+        <div class="container mx-auto max-w-6xl">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-12 gold-accent" data-aos="fade-up">
+                My Projects
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 projects-container">
+                <!-- Project Card 1 -->
+                <div class="card-hover gold-border rounded-xl overflow-hidden bg-black/50 backdrop-blur" data-aos="fade-up" data-aos-delay="100">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://via.placeholder.com/400x300/1a1a1a/d4af37?text=Project+1" 
+                             alt="Website Portfolio" 
+                             class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2 gold-accent">Website Portfolio</h3>
+                        <p class="text-gray-400 text-sm mb-4">Portfolio pribadi dengan design modern dan animasi smooth menggunakan HTML, CSS, dan JavaScript.</p>
+                        <div class="flex gap-3">
+                            <a href="#" class="text-sm btn-gold px-4 py-2 rounded-lg" target="_blank">Live Demo</a>
+                            <a href="#" class="text-sm btn-outline-gold px-4 py-2 rounded-lg" target="_blank">Source Code</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project Card 2 -->
+                <div class="card-hover gold-border rounded-xl overflow-hidden bg-black/50 backdrop-blur" data-aos="fade-up" data-aos-delay="200">
+                    <div class="h-48 overflow-hidden">
+                        <img src="assets/smp 2.jpeg" 
+                             alt="Website SMPN 2 Kota Malang" 
+                             class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2 gold-accent">Website SMPN 2 Malang</h3>
+                        <p class="text-gray-400 text-sm mb-4">Website SMPN 2 Malang yang digunakan sebagai media informasi dan komunikasi terkait Sekolah</p>
+                        <div class="flex gap-3">
+                            <a href="https://www.figma.com/design/0RzUpq91r6j9j8375BsZoC/Website-Esempe?node-id=1-2&t=JCAdMFpUAnFm6PNA-1" class="text-sm btn-gold px-4 py-2 rounded-lg" target="_blank">Mockup</a>
+                            <a href="https://github.com/IrfanFalz/Project-PJBL-" class="text-sm btn-outline-gold px-4 py-2 rounded-lg" target="_blank">Source Code</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project Card 3 -->
+                <div class="card-hover gold-border rounded-xl overflow-hidden bg-black/50 backdrop-blur" data-aos="fade-up" data-aos-delay="300">
+                    <div class="h-48 overflow-hidden">
+                        <img src="assets/goekskul.png" 
+                             alt="GoEkskul" 
+                             class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2 gold-accent">Front End Flutter Aplikasi Mobile GoEkskul</h3>
+                        <p class="text-gray-400 text-sm mb-4">GoEkskul adalah aplikasi mobile yang menyediakan informasi lengkap mengenai kegiatan ekstrakurikuler di sekolah. </p>
+                        <div class="flex gap-3">
+                            <a href="https://www.figma.com/design/3BiojJ9isRqEnbBHZ1cLnD/ekstrakulikuler?node-id=0-1&t=3FjcU1EpI3PpRkNX-1" class="text-sm btn-gold px-4 py-2 rounded-lg" target="_blank">Mockup </a>
+                            <a href="https://github.com/IrfanFalz/Projek-PAS-PJBL" class="text-sm btn-outline-gold px-4 py-2 rounded-lg" target="_blank">Source Code</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project Card 4 -->
+                <div class="card-hover gold-border rounded-xl overflow-hidden bg-black/50 backdrop-blur" data-aos="fade-up" data-aos-delay="100">
+                    <div class="h-48 overflow-hidden">
+                        <img src="assets/SIPERS.png" 
+                             alt="SIPERS" 
+                             class="sipers w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2 gold-accent">SIPERS</h3>
+                        <p class="text-gray-400 text-sm mb-4">Sistem Informasi dan Persuratan Sekolah, adalah website Tata usaha sekolah yang digunakan guru untuk mengajukan surat</p>
+                        <div class="flex gap-3">
+                            <a href="https://www.figma.com/design/G9M7K5cOPDzkpy56ykAqjY/FIGMA-Kelompok-9?node-id=179-2&t=c6XeQFkxvSDqRWRd-1" class="text-sm btn-gold px-4 py-2 rounded-lg" target="_blank">Mockup</a>
+                            <a href="https://github.com/IrfanFalz/Persuratan" class="text-sm btn-outline-gold px-4 py-2 rounded-lg" target="_blank">Source Code</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project Card 5 -->
+                <div class="card-hover gold-border rounded-xl overflow-hidden bg-black/50 backdrop-blur" data-aos="fade-up" data-aos-delay="200">
+                    <div class="h-48 overflow-hidden">
+                        <img src="assets/dodaily.png" 
+                             alt="DoDaily" 
+                             class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2 gold-accent">DoDaily</h3>
+                        <p class="text-gray-400 text-sm mb-4">DoDaily adalah aplikasi to-do list sederhana untuk mencatat dan mengelola tugas harian agar lebih teratur dan produktif.</p>
+                        <div class="flex gap-3">
+                            <a href="https://www.figma.com/design/6N35ijVcLaIQlCbareHtbf/DoDaily?node-id=0-1&t=Ae5EdOl5KxsVoeTC-1" class="text-sm btn-gold px-4 py-2 rounded-lg" target="_blank">Mockup</a>
+                            <a href="https://github.com/IrfanFalz/do_daily" class="text-sm btn-outline-gold px-4 py-2 rounded-lg" target="_blank">Source Code</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project Card 6 -->
+                <div class="card-hover gold-border rounded-xl overflow-hidden bg-black/50 backdrop-blur" data-aos="fade-up" data-aos-delay="300">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://via.placeholder.com/400x300/1a1a1a/d4af37?text=Project+6" 
+                             alt="Calculator App" 
+                             class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2 gold-accent">Calculator App</h3>
+                        <p class="text-gray-400 text-sm mb-4">Kalkulator modern dengan UI yang clean dan fitur operasi matematika lengkap.</p>
+                        <div class="flex gap-3">
+                            <a href="#" class="text-sm btn-gold px-4 py-2 rounded-lg" target="_blank">Live Demo</a>
+                            <a href="#" class="text-sm btn-outline-gold px-4 py-2 rounded-lg" target="_blank">Source Code</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="relative py-16 px-6">
+        <div class="container mx-auto max-w-4xl">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-12 gold-accent" data-aos="fade-up">
+                About Me
+            </h2>
+            <div class="gold-border rounded-2xl p-8 md:p-12 bg-black/50 backdrop-blur" data-aos="fade-up" data-aos-delay="200">
+                <p class="text-gray-300 leading-relaxed mb-6">
+                    Halo! Saya Irfan Fahri Lazuardi, siswa SMK Negeri 4 Kota Malang, jurusan Rekayasa Perangkat Lunak kelas XI. Saya berasal dari Kota Malang. 
+                </p>
+                <p class="text-gray-300 leading-relaxed mb-6">
+                    Sejak awal masuk SMK, saya tertarik dengan cara kerja website dan aplikasi web. Saya memiliki passion yang besar dalam dunia pemrograman, terutama di bidang front-end development.Saat ini, saya sedang mendalami cara membuat website yang tidak hanya berfungsi dengan baik, tetapi juga memiliki tampilan visual yang elegan, interaktif, dan nyaman digunakan.
+                </p>
+                <p class="text-gray-300 leading-relaxed mb-6">
+                    Saat ini saya sedang mempersiapkan diri untuk Program Praktik Kerja Lapangan (PKL). Saya sangat antusias untuk mendapatkan pengalaman nyata di dunia industri teknologi dan berkolaborasi dengan profesional di bidang ini.
+                </p>
+                <p class="text-gray-300 leading-relaxed mb-6">
+                    Tujuan saya sederhana: berkembang selangkah demi selangkah, membangun kemampuan yang solid, dan menciptakan karya yang membawa nilai.
+                </p>
+                <div class="mt-8 p-6 gold-border rounded-xl bg-black/30">
+                    <h3 class="text-xl font-bold gold-accent mb-4">Visi Saya Sebagai Web Developer Pemula:</h3>
+                    <ul class="space-y-2 text-gray-300">
+                        <li class="flex items-start">
+                            <span class="gold-accent mr-2">▹</span>
+                            <span>Membangun website yang mengutamakan pengalaman pengguna.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="gold-accent mr-2">▹</span>
+                            <span>Menjadi developer yang peduli pada estetika & performa.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="gold-accent mr-2">▹</span>
+                            <span>Terus berkembang untuk menjadi ahli front-end modern.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="gold-accent mr-2">▹</span>
+                            <span>Mengembangkan soft skills dan teamwork</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="relative py-16 px-6">
+        <div class="container mx-auto max-w-5xl">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-12 gold-accent" data-aos="fade-up">
+                My Skills
+            </h2>
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+                <!-- Skill 1 -->
+                <div class="flex flex-col items-center" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="skill-icon w-20 h-20 mb-4 transition-all duration-300">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5" class="w-full h-full">
+                    </div>
+                    <span class="text-gray-300 font-semibold">HTML5</span>
+                </div>
+
+                <!-- Skill 2 -->
+                <div class="flex flex-col items-center" data-aos="zoom-in" data-aos-delay="150">
+                    <div class="skill-icon w-20 h-20 mb-4 transition-all duration-300">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS3" class="w-full h-full">
+                    </div>
+                    <span class="text-gray-300 font-semibold">CSS</span>
+                </div>
+
+                <!-- Skill 3 -->
+                <div class="flex flex-col items-center" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="skill-icon w-20 h-20 mb-4 transition-all duration-300">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript" class="w-full h-full">
+                    </div>
+                    <span class="text-gray-300 font-semibold">JavaScript</span>
+                </div>
+
+                <!-- Skill 4 -->
+                <div class="flex flex-col items-center" data-aos="zoom-in" data-aos-delay="250">
+                    <div class="skill-icon w-20 h-20 mb-4 transition-all duration-300">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg" alt="Tailwind CSS" class="w-full h-full">
+                    </div>
+                    <span class="text-gray-300 font-semibold">Tailwind CSS</span>
+                </div>
+
+                <!-- Skill 5 -->
+                <div class="flex flex-col items-center" data-aos="zoom-in" data-aos-delay="300">
+                    <div class="skill-icon w-20 h-20 mb-4 transition-all duration-300">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg" alt="Bootstrap" class="w-full h-full">
+                    </div>
+                    <span class="text-gray-300 font-semibold">Bootstrap</span>
+                </div>
+
+                <!-- Skill 6 -->
+                <div class="flex flex-col items-center" data-aos="zoom-in" data-aos-delay="350">
+                    <div class="skill-icon w-20 h-20 mb-4 transition-all duration-300">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git" class="w-full h-full">
+                    </div>
+                    <span class="text-gray-300 font-semibold">Git</span>
+                </div>
+
+                <!-- Skill 7 -->
+                <div class="flex flex-col items-center" data-aos="zoom-in" data-aos-delay="400">
+                    <div class="skill-icon w-20 h-20 mb-4 transition-all duration-300">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub" class="w-full h-full filter invert">
+                    </div>
+                    <span class="text-gray-300 font-semibold">GitHub</span>
+                </div>
+
+                <!-- Skill 8 -->
+                <div class="flex flex-col items-center" data-aos="zoom-in" data-aos-delay="450">
+                    <div class="skill-icon w-20 h-20 mb-4 transition-all duration-300">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" alt="Figma" class="w-full h-full">
+                    </div>
+                    <span class="text-gray-300 font-semibold">Figma</span>
+                </div>
+
+                <!-- Skill 9 -->
+                 <div class="flex flex-col items-center" data-aos="zoom-in" data-aos-delay="500">
+                    <div class="skill-icon w-20 h-20 mb-4 transition-all duration-300">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/laravel/laravel-original.svg" alt="laravel" class="w-full h-full">
+                    </div>
+                    <span class="text-gray-300 font-semibold">Laravel</span>
+                </div>
+
+                <!-- Skill 10 -->
+                 <div class="flex flex-col items-center" data-aos="zoom-in" data-aos-delay="550">
+                    <div class="skill-icon w-20 h-20 mb-4 transition-all duration-300">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" alt="PHP" class="w-full h-full">
+                    </div>
+                    <span class="text-gray-300 font-semibold">PHP</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="relative py-16 px-6 mb-12">
+        <div class="container mx-auto max-w-4xl">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-12 gold-accent" data-aos="fade-up">
+                Get In Touch
+            </h2>
+            <div class="text-center mb-12" data-aos="fade-up" data-aos-delay="200">
+                <p class="text-gray-300 text-lg mb-2">Tertarik untuk mengenal saya lebih lanjut?</p>
+                <p class="text-gray-400">Jangan ragu untuk menghubungi saya!</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto">
+                <!-- Instagram -->
+                <a href="https://www.instagram.com/irfannflaz/" target="_blank" class="social-icon flex items-center gap-4 p-5 rounded-xl bg-black/50 backdrop-blur" data-aos="fade-up" data-aos-delay="100">
+                    <div class="w-12 h-12 flex items-center justify-center rounded-full bg-gradient-to-br from-purple-600 to-pink-600">
+                        <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                        </svg>
+                    </div>
+                    <div class="text-left">
+                        <div class="text-sm text-gray-400">Instagram</div>
+                        <div class="font-semibold text-gray-200">@irfannflaz</div>
+                    </div>
+                </a>
+
+                <!-- GitHub -->
+                <a href="https://github.com/IrfanFalz" target="_blank" class="social-icon flex items-center gap-4 p-5 rounded-xl bg-black/50 backdrop-blur" data-aos="fade-up" data-aos-delay="150">
+                    <div class="w-12 h-12 flex items-center justify-center rounded-full bg-gray-700">
+                        <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                        </svg>
+                    </div>
+                    <div class="text-left">
+                        <div class="text-sm text-gray-400">GitHub</div>
+                        <div class="font-semibold text-gray-200">github.com/IrfanFalz</div>
+                    </div>
+                </a>
+
+                <!-- Facebook -->
+                <a href="https://www.facebook.com/share/1DFoSPPw6j/" target="_blank" class="social-icon flex items-center gap-4 p-5 rounded-xl bg-black/50 backdrop-blur" data-aos="fade-up" data-aos-delay="200">
+                    <div class="w-12 h-12 flex items-center justify-center rounded-full bg-blue-600">
+                        <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                        </svg>
+                    </div>
+                    <div class="text-left">
+                        <div class="text-sm text-gray-400">Facebook</div>
+                        <div class="font-semibold text-gray-200">Irfan Fahri</div>
+                    </div>
+                </a>
+
+                <!-- Email -->
+                <a href="#" class="social-icon flex items-center gap-4 p-5 rounded-xl bg-black/50 backdrop-blur" data-aos="fade-up" data-aos-delay="250">
+                    <div class="w-12 h-12 flex items-center justify-center rounded-full bg-red-600">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                        </svg>
+                    </div>
+                    <div class="text-left">
+                        <div class="text-sm text-gray-400">Email</div>
+                        <div class="font-semibold text-gray-200">fahriirfan08@gmail.com</div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Address -->
+            <div class="mt-8 max-w-3xl mx-auto" data-aos="fade-up" data-aos-delay="300">
+                <div class="social-icon flex items-center gap-4 p-5 rounded-xl bg-black/50 backdrop-blur">
+                    <div class="w-12 h-12 flex items-center justify-center rounded-full bg-green-600 flex-shrink-0">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                        </svg>
+                    </div>
+                    <div class="text-left">
+                        <div class="text-sm text-gray-400">Alamat</div>
+                        <div class="font-semibold text-gray-200">Jl. Kebalen Wetan Gg. 7, Kotalama, Kedungkandang, Kota Malang</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="relative py-8 px-6 border-t border-gray-800">
+        <div class="container mx-auto text-center">
+            <p class="text-gray-400">
+                &copy; 2024 <span class="gold-accent">Irfan Fahri Lazuardi</span>. All rights reserved.
+            </p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 50
+        });
+
+        // Enhanced Particles with varying brightness
+        function createParticles() {
+            const container = document.getElementById('particles');
+            const particleCount = 60;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                
+                // Randomly assign brightness class
+                const brightness = Math.random();
+                if (brightness > 0.7) {
+                    particle.classList.add('particle-bright');
+                } else if (brightness > 0.4) {
+                    particle.classList.add('particle-medium');
+                } else {
+                    particle.classList.add('particle-dim');
+                }
+                
+                const size = Math.random() * 6 + 3; // 3-9px
+                const startX = Math.random() * 100;
+                const moveX = (Math.random() - 0.5) * 150;
+                const duration = Math.random() * 25 + 15; // 15-40s
+                const delay = Math.random() * 8;
+                
+                particle.style.cssText = `
+                    width: ${size}px;
+                    height: ${size}px;
+                    left: ${startX}%;
+                    --tx: ${moveX}px;
+                    animation-duration: ${duration}s;
+                    animation-delay: ${delay}s;
+                `;
+                
+                container.appendChild(particle);
+            }
+        }
+
+        // Advanced Typing Animation with Delete Effect
+        function multiTypeWriter() {
+            const element = document.getElementById('typed-text');
+            const texts = [
+                'Irfan Fahri Lazuardi',
+                'Front-end Developer',
+                'Siswa SMKN 4 Malang'
+            ];
+            let textIndex = 0;
+            let charIndex = 0;
+            let isDeleting = false;
+            let typingSpeed = 100;
+
+            function type() {
+                const currentText = texts[textIndex];
+                
+                if (isDeleting) {
+                    // Menghapus karakter
+                    element.textContent = currentText.substring(0, charIndex - 1);
+                    charIndex--;
+                    typingSpeed = 50; // Kecepatan hapus lebih cepat
+                } else {
+                    // Mengetik karakter
+                    element.textContent = currentText.substring(0, charIndex + 1);
+                    charIndex++;
+                    typingSpeed = 100; // Kecepatan ketik normal
+                }
+
+                // Jika selesai mengetik
+                if (!isDeleting && charIndex === currentText.length) {
+                    typingSpeed = 2000; // Pause 2 detik sebelum hapus
+                    isDeleting = true;
+                }
+                // Jika selesai menghapus
+                else if (isDeleting && charIndex === 0) {
+                    isDeleting = false;
+                    textIndex = (textIndex + 1) % texts.length; // Pindah ke teks berikutnya
+                    typingSpeed = 500; // Pause 0.5 detik sebelum ketik lagi
+                }
+
+                setTimeout(type, typingSpeed);
+            }
+
+            type();
+        }
+
+        // Initialize immediately
+        document.addEventListener('DOMContentLoaded', () => {
+            createParticles();
+            // Start typing animation after short delay
+            setTimeout(() => {
+                multiTypeWriter();
+            }, 300);
+        });
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Navbar Scroll Effect
+        let lastScroll = 0;
+        const navbar = document.getElementById('navbar');
+
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            
+            if (currentScroll > 100) {
+                navbar.style.padding = '0.75rem 0';
+            } else {
+                navbar.style.padding = '1rem 0';
+            }
+            
+            lastScroll = currentScroll;
+        });
+
+        // Smooth Scroll for Navigation Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Mobile Menu Toggle
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('gold-accent');
+                if (link.getAttribute('href').slice(1) === current) {
+                    link.classList.add('gold-accent');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
