@@ -55,7 +55,7 @@ _(akan ditambahkan setelah deploy)_
 
 Jika ingin menghubungi saya:
 - Email: fahriirfan08@gmail.com  
-- Instagram: @irfannflaz 
+- Instagram: https://www.instagram.com/irfannflaz/
 - GitHub: https://github.com/IrfanFalz
 
 ---
